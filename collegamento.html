@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Anime</title>
+</head>
+<body>
+    <h1>Lista Anime</h1>
+
+    <script>
+
+        function add(){
+            debugger
+            Titolo = document.getElementById("AnimeTitolo").value;
+
+            NumeroEp = document.getElementById("NumeroEp").value;
+
+            fetch('https://htmlpostgress.onrender.com/AddAnime', {   //http://localhost:3000/AddAnime
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    titolo: Titolo,
+                    numeroEp: NumeroEp
+                })
+            })
+            .then(response => {response.json(); debugger})
+            .then(data => console.log('Anime aggiunto:', data))
+            .catch(error => console.error('Errore:', error));
+            
+        }
+    </script>
+
+    <br>
+    Add Anime: 
+    <input id="AnimeTitolo" type="text" required>
+    <input id="NumeroEp" type="number" required>
+    <input type="submit" onclick="add()"></input>
+</body>
+</html>
