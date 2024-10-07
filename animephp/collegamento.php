@@ -22,7 +22,7 @@
 
         // Estrai i dati e controlla che siano presenti
         $titolo = isset($data['titolo']) ? $data['titolo'] : '';
-        $descizione = isset($data['descizione']) ? $data['descizione'] : '';
+        $descrizione = isset($data['descrizione']) ? $data['descrizione'] : '';  // Fix typo here
         $locandina = isset($data['locandina']) ? $data['locandina'] : '';
         $stato = isset($data['stato']) ? (int)$data['stato'] : 0;
         $dataDiUscita = isset($data['dataDiUscita']) ? $data['dataDiUscita'] : '';
@@ -33,7 +33,7 @@
 
             // Prepara la query di inserimento utilizzando prepared statements
             $stmt = $con->prepare("INSERT INTO `anime` (`titolo`, `descrizione`, `locandina`, `stato`, `dataDiUscita`, `numeroEp`) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssisi", $titolo, $descizione, $locandina, $stato, $dataDiUscita, $numeroEp);
+            $stmt->bind_param("sssisi", $titolo, $descrizione, $locandina, $stato, $dataDiUscita, $numeroEp); // Make sure you bind the corrected variable
 
             // Esegui la query
             if ($stmt->execute()) {
