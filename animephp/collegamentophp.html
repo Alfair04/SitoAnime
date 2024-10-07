@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Anime</title>
+</head>
+<body>
+    <h1>Lista Anime</h1>
+
+    <br>
+    Add Anime: 
+    <input id="titolo" type="text" placeholder="Titolo" required>
+    <input id="descrizione" type="text" placeholder="Descrizione">
+    <input id="locandina" type="text" placeholder="URL Locandina">
+    <input id="stato" type="number" placeholder="Stato (1: in corso, 2: terminato)" required>
+    <input id="dataDiUscita" type="date" placeholder="Data di Uscita">
+    <input id="numeroEp" type="number" placeholder="Numero Episodi">
+    <input type="submit" onclick="post()">
+
+    <script>
+        function post() {
+            // Get input values
+            var titolo = document.getElementById("titolo").value;
+            var descrizione = document.getElementById("descrizione").value;
+            var locandina = document.getElementById("locandina").value;
+            var stato = parseInt(document.getElementById("stato").value);
+            var dataDiUscita = document.getElementById("dataDiUscita").value;
+            var numeroEp = parseInt(document.getElementById("numeroEp").value);
+
+            // Validate required fields
+            if (titolo !== "" && !isNaN(stato)) {
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        titolo: titolo,
+                        descrizione: descrizione,
+                        locandina: locandina,
+                        stato: stato,
+                        dataDiUscita: dataDiUscita,
+                        numeroEp: numeroEp
+                    }),
+                };
+
+                // Send request to server
+                fetch('http://listaanime.000.pe/animephp/collegamento.php', options)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();  // Ensure it's a valid JSON response
+                        } else {
+                            throw new Error('Failed to submit data');
+                        }
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // alert("Anime aggiunto con successo!");
+                        // Uncomment below if you want to redirect after submission
+                        window.location.href = "http://listaanime.000.pe/animephp";
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Si è verificato un errore durante l'invio dei dati.");
+                    });
+            } else {
+                alert("I campi obbligatori non sono stati compilati correttamente.");
+            }
+        }
+    </script>
+</body>
+</html>
