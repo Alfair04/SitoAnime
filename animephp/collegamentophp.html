@@ -21,6 +21,7 @@
     <script>
         function post() {
             // Get input values
+            debugger
             var titolo = document.getElementById("titolo").value;
             var descrizione = document.getElementById("descrizione").value;
             var locandina = document.getElementById("locandina").value;
@@ -47,7 +48,7 @@
 
                 // Send request to server
                 fetch('http://listaanime.000.pe/animephp/collegamento.php', options)
-                    .then(response => {
+                    .then(response => { debugger
                         if (response.ok) {
                             return response.json();  // Ensure it's a valid JSON response
                         } else {
@@ -56,6 +57,7 @@
                     })
                     .then(data => {
                         console.log(data);
+                        debugger
                         // alert("Anime aggiunto con successo!");
                         // Uncomment below if you want to redirect after submission
                         window.location.href = "http://listaanime.000.pe/animephp";
