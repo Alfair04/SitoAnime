@@ -284,7 +284,7 @@
                         // Estrai ogni riga come array associativo
                         while ($row = mysqli_fetch_assoc($result)) {
                             // Stampa i risultati
-                            echo "<div id=".$row["id"]."><div class='slot'><img src='https://img.animeworld.so/locandine/cSYmm.jpg' alt='Anime 1'></div>".$row["titolo"]." - ".$row["numeroEp"]." episodi</div>";
+                            echo "<div id=".$row["id"]."><div class='slot'><img src='".$row["locandina"]."' alt='Anime' onerror=\"this.onerror=null;this.src='https://i.imgur.com/j9OYEpF.png';\"></div>".$row["titolo"]." - ".$row["numeroEp"]." episodi</div>";
                         }
                     } else {
                         echo "Nessun risultato trovato.";
